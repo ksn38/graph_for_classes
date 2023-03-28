@@ -1,4 +1,4 @@
-Script shows python or php classes from any library in html file and builds graph for them
+Script shows python/php/js/java classes from any library in html file and builds graph for them
  
 Django framework:
 ![Django framework](https://github.com/ksn38/graph_for_classes/blob/main/gallery/Django.jpg)
