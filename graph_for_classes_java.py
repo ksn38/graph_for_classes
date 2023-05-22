@@ -9,6 +9,8 @@ import numpy as np
 #path_of_lib = 'C:\\Users\\ksn\\frameworks\\spring-framework-main\\'
 path_of_lib = 'C:\\Users\\ksn\\frameworks\\spring-boot-main\\'
 
+size_img = 100
+
 if os.name == "posix":
     lib = path_of_lib.split('/')[-2]
 elif os.name == "nt":
@@ -68,7 +70,7 @@ class_counter = Counter(list_classes)
 
 #create graph
 fig, ax = plt.subplots()
-fig.set_size_inches(100, 100)
+fig.set_size_inches(size_img, size_img)
 fig.patch.set_visible(False)
 #ax.axis('off')
 fig.subplots_adjust(left=0, bottom=0, right=1, top=1, wspace=0, hspace=0)
