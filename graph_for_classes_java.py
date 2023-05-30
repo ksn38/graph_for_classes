@@ -9,7 +9,7 @@ import numpy as np
 #path_of_lib = 'C:\\Users\\ksn\\frameworks\\spring-framework-main\\'
 path_of_lib = 'C:\\Users\\ksn\\frameworks\\spring-boot-main\\'
 
-size_img = 100
+size_image = 100
 
 if os.name == "posix":
     lib = path_of_lib.split('/')[-2]
@@ -43,13 +43,13 @@ def open_and_re(path, list_classes, list_classes_for_graph, list_classes_for_htm
             if len(list_1_or_more_classes) > 1:
                 for j in list_1_or_more_classes[1:]:
                     list_classes_for_graph.append([list_1_or_more_classes[0], j])
-        if len(classes) > 0:
-            list_classes_for_html.append(f'<a href="{path}">{path}</a>')
         for c in classes:
             c = c.replace('<', '&lt')
             c = c.replace('>', '&gt')
             c = c.replace('{', '')
             list_classes_for_html.append(f'<div>{c}</div>')
+        if len(classes) > 0:
+            list_classes_for_html.append(f'<a href="{path}">{path}</a>')
 
 #run previous function on multiple files
 def printer(tuple_from_oswalk):
@@ -70,7 +70,7 @@ class_counter = Counter(list_classes)
 
 #create graph
 fig, ax = plt.subplots()
-fig.set_size_inches(size_img, size_img)
+fig.set_size_inches(size_image, size_image)
 fig.patch.set_visible(False)
 #ax.axis('off')
 fig.subplots_adjust(left=0, bottom=0, right=1, top=1, wspace=0, hspace=0)
