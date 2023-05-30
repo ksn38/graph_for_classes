@@ -1,7 +1,7 @@
 Script shows Python/PHP/JavaScript/Java OOP-classes from any library in html file and builds graph for them
  
 django:
-![django](https://github.com/ksn38/graph_for_classes/blob/main/gallery/django.jpg)
+![django](https://github.com/ksn38/graph_for_classes/blob/main/gallery/Django.jpg)
  
 node.js:
 ![node.js](https://github.com/ksn38/graph_for_classes/blob/main/gallery/node.js.jpg)
