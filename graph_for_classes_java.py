@@ -81,7 +81,7 @@ for i in list_classes_for_graph:
     G.add_edge(*i, minlen = 1000)
 
 pos = nx.spring_layout(G, k=0.05, iterations=25)
-nx.draw_networkx(G, pos, node_color='orange', edge_color='g', node_size=100)
+nx.draw_networkx(G, pos, arrows=True, node_color='orange', edge_color='g', node_size=100)
 
 plt.savefig(f'{lib}.png')
 
