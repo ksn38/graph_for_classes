@@ -6,9 +6,9 @@ import networkx as nx
 import numpy as np
 
 # path_of_lib = '/home/ksn38/symfony-6.3/'
-# path_of_lib = 'C:\\Python37\\Lib\\site-packages\\django\\'
+# path_of_lib = 'C:\\Python37\\Lib\\site-packages\\tensorflow\\'
 # path_of_lib = 'E:\\Temp\\bitrix\\'
-path_of_lib = 'C:\\Users\\ksn\\frameworks\\django-main\\django\\'
+path_of_lib = 'C:\\Users\\ksn\\frameworks\\node-main\\src\\'
 
 size_image = 50
 
