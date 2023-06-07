@@ -10,7 +10,7 @@ laravel (frequency of classes > 2):
 ![laravel](https://github.com/ksn38/graph_for_classes/blob/main/gallery/laravel.jpg)
  
 pytorch (frequency of classes > 3):
-![torch](https://github.com/ksn38/graph_for_classes/blob/main/gallery/torch.jpg)
+![pytorch](https://github.com/ksn38/graph_for_classes/blob/main/gallery/pytorch.jpg)
  
 tensorflow (frequency of classes > 3):
 ![tensorflow](https://github.com/ksn38/graph_for_classes/blob/main/gallery/tensorflow.jpg)
