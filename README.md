@@ -1,4 +1,4 @@
-Script shows Python/PHP/JavaScript/Java OOP-classes from any library in html file and builds graph for them. The number in parentheses is the number of subclasses + n, where "n" is the number of parent classes + 1.
+Script shows Python/PHP/JavaScript/Java OOP-classes from any library in html file and builds graph for them. The number in parentheses is the number of subclasses + 1.
  
 django (> 3):
 ![django](https://github.com/ksn38/graph_for_classes/blob/main/gallery/Django.jpg)
