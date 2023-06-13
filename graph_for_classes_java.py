@@ -10,8 +10,8 @@ import pandas as pd
 path_of_lib = 'C:\\Users\\ksn\\frameworks\\spring-framework-main\\'
 
 size_image = 50
-min_frequency_class = 3
-max_frequency_class = None
+min_subclasses = 3
+max_subclasses = None
 
 if os.name == "posix":
     lib = path_of_lib.split('/')[-2]
@@ -76,44 +76,43 @@ class_counter_lt_gt = set()
 for i in class_counter.items():
     if i[1] > 1:
         class_counter_gt_1[i[0]] = i[1]
-    if max_frequency_class == None:
-        if i[1] < min_frequency_class:
+    if max_subclasses == None:
+        if i[1] < min_subclasses + 1:
             class_counter_lt_gt.add(i[0])
-    if max_frequency_class != None:
-        if max_frequency_class < i[1] or i[1] < min_frequency_class:
-            class_counter_lt_gt.add(i[0])        
+    if max_subclasses != None:
+        if max_subclasses + 1 < i[1] or i[1] < min_subclasses + 1:
+            class_counter_lt_gt.add(i[0])          
     
 class_counter_gt_1_origin = class_counter_gt_1.copy()
 
 #create graph
-size = 50
-
 fig, ax = plt.subplots()
-fig.set_size_inches(size, size)
+fig.set_size_inches(size_image, size_image)
 fig.patch.set_visible(False)
 ax.set_facecolor('k')
 fig.subplots_adjust(left=0, bottom=0, right=1, top=1, wspace=0, hspace=0)
 
+DG = nx.DiGraph()
 G = nx.Graph()
 
 for i in list_classes_for_graph:
     if i[0] not in class_counter_lt_gt and i[1] not in class_counter_lt_gt:
-        G.add_edge(*i, minlen = 1000)
-    
-df = pd.DataFrame(list(G.degree), columns=['node','degree']).set_index('node')
+        DG.add_edge(i[1], i[0])
+        G.add_edge(i[1], i[0])
 
+df = pd.DataFrame(list(G.degree), columns=['node','degree']).set_index('node')
 df['color'] = 1/df['degree']
 vmin = df['color'].min()
 vmax = df['color'].max()
 cmap = plt.cm.rainbow_r
 
-pos = nx.spring_layout(G, k=0.115, iterations=25)
-nx.draw_networkx(G, pos=pos, arrows=True, node_size=df.degree*100, node_color=df['color'],\
+pos = nx.spring_layout(G, k=0.2, seed=38)
+nx.draw_networkx(DG, pos=pos, arrows=True, arrowsize=20, node_size=df.degree*100, node_color=df['color'],\
                  edge_color='grey', font_color='white', cmap=cmap, vmin=vmin, vmax=vmax)
 # sm = plt.cm.ScalarMappable(cmap=cmap, norm=plt.Normalize(vmin=vmin, vmax=vmax))
 # sm.set_array([])
 #cbar = plt.colorbar(sm)
-plt.savefig(f'{lib}_gt_{min_frequency_class}_lt_{max_frequency_class}.png')
+plt.savefig(f'{lib}_gt_{min_subclasses}_lt_{max_subclasses}.png')
 
 list_classes_for_html.append('<br><span><b>Classes counter:</b></span><br>')
 for i in sorted(class_counter_gt_1_origin.items(), key= lambda item: item[1], reverse=True):
