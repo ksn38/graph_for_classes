@@ -24,9 +24,10 @@ elif os.name == "nt":
 list_classes = []
 list_classes_for_graph = []
 list_classes_for_html = []
+list_sizes_of_files = []
 list_classes_for_html.append('<!DOCTYPE html><html><head><meta charset="utf-8"><title></title>\
 <style>body{background-color: #1b232a;}div{color: #a0a0a0;}a{color: #55e1e6;}span{color: #dadada;}\
-</style></head><span><i>The number is amount of subclasses</i></span><br><br>')
+</style></head><span><i>The numbers are amount of subclasses and size of file</i></span><br><br>')
 
 #open file and get names classes with regex
 def open_and_re(path, list_classes, list_classes_for_graph, list_classes_for_html):
@@ -55,7 +56,9 @@ def open_and_re(path, list_classes, list_classes_for_graph, list_classes_for_htm
             c = c.replace('>', '&gt')
             list_classes_for_html.append(f'<div>{c}</div>')
         if len(classes) > 0:
-            list_classes_for_html.append(f'<a href="{path}">{path}</a>')
+            list_classes_for_html.append(f'<a href="{path}">{path}</a>&nbsp&nbsp&nbsp\
+            <span style="color: rgb(50 ,50, blue)">{os.path.getsize(path)}</span>')
+            list_sizes_of_files.append(os.path.getsize(path))
 
 #run previous function on multiple files
 def printer(tuple_from_oswalk):
@@ -128,10 +131,18 @@ dict_line = dict(zip(sorted(set(class_counter_gt_1.values()), reverse=True), \
 
 for k, v in class_counter_gt_1.items():
     class_counter_gt_1[k] = dict_line[v]
+    
+dict_colors_for_sizes = dict(zip(sorted(list_sizes_of_files),\
+                                 np.linspace(0, 255, len(list_sizes_of_files))))
 
 #added colors and counter values in html
 for i in range(len(list_classes_for_html)):
+    size_for_color = (re.findall('ue\)">\d*', list_classes_for_html[i]))
+    if len(size_for_color) > 0:
+        list_classes_for_html[i] = re.sub('blue', \
+                     str(dict_colors_for_sizes[int(size_for_color[0][5:])]), list_classes_for_html[i])
     try:
+
         c = re.findall('class\s\w+|interface\s\w+\s\w+', list_classes_for_html[i])
     except:
         c = []
