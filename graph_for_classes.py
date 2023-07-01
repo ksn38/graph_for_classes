@@ -10,10 +10,11 @@ import pandas as pd
 # path_of_lib = 'C:\\Python37\\Lib\\site-packages\\tensorflow\\'
 # path_of_lib = 'E:\\Temp\\bitrix\\'
 # path_of_lib = 'C:\\Users\\ksn\\stable-diffusion-webui\\'
+# path_of_lib = 'D:\\Temp\\M\\framework-10.x\\'
 path_of_lib = 'C:\\Users\\ksn\\frameworks\\angular-main\\'
 
 size_image = 50
-min_subclasses = 0
+min_subclasses = 3
 max_subclasses = None
 
 if os.name == "posix":
@@ -25,6 +26,7 @@ list_classes = []
 list_classes_for_graph = []
 list_classes_for_html = []
 list_sizes_of_files = []
+dict_sizes_of_classes = dict()
 list_classes_for_html.append('<!DOCTYPE html><html><head><meta charset="utf-8"><title></title>\
 <style>body{background-color: #1b232a;}div{color: #a0a0a0;}a{color: #55e1e6;}span{color: #dadada;}\
 </style></head><span><i>The numbers are amount of subclasses and size of file</i></span><br><br>')
@@ -49,6 +51,8 @@ def open_and_re(path, list_classes, list_classes_for_graph, list_classes_for_htm
             if len(list_1_or_more_classes) > 1:
                 for j in list_1_or_more_classes[1:]:
                     list_classes_for_graph.append([list_1_or_more_classes[0], j])
+                    dict_sizes_of_classes[list_1_or_more_classes[0]] = os.path.getsize(path)
+                    dict_sizes_of_classes[j] = os.path.getsize(path)
         for c in classes:
             c = c.replace('{', '')
             c = c.replace('}', '')
@@ -108,10 +112,12 @@ for i in list_classes_for_graph:
         G.add_edge(i[1], i[0])
 
 df = pd.DataFrame(list(G.degree), columns=['node','degree']).set_index('node')
-df['color'] = 1/df['degree']
+df_size = pd.DataFrame({'node': list(dict_sizes_of_classes.keys()), 'size': list(dict_sizes_of_classes.values())})
+df = pd.merge(df, df_size, how='left', on='node')
+df['color'] = df['size'].rank()
 vmin = df['color'].min()
 vmax = df['color'].max()
-cmap = plt.cm.rainbow_r
+cmap = plt.cm.rainbow
 
 pos = nx.spring_layout(G, k=0.2, seed=38)
 nx.draw_networkx(DG, pos=pos, arrows=True, arrowsize=20, node_size=df.degree*100, node_color=df['color'],\

@@ -1,4 +1,4 @@
-Script shows Python/PHP/JavaScript/Java OOP-classes from any library in html file and builds graph for them. The number in parentheses is the minimal number of subclasses. Node color and size are related to the number of subclasses.
+Script shows Python/PHP/JavaScript/Java OOP-classes from any library in html file and builds graph for them. Node color is related to the size of file.  Node size is related to the number of subclasses. The number in parentheses is the minimal number of subclasses. 
  
 django (> 2):
 ![django](https://github.com/ksn38/graph_for_classes/blob/main/gallery/Django.jpg)
