@@ -11,10 +11,10 @@ import pandas as pd
 # path_of_lib = 'E:\\Temp\\bitrix\\'
 # path_of_lib = 'C:\\Users\\ksn\\stable-diffusion-webui\\'
 # path_of_lib = 'D:\\Temp\\M\\framework-10.x\\'
-path_of_lib = 'C:\\Users\\ksn\\frameworks\\angular-main\\'
+path_of_lib = 'C:\\Users\\ksn\\frameworks\\tensorflow-master\\'
 
 size_image = 50
-min_subclasses = 3
+min_subclasses = 2
 max_subclasses = None
 
 if os.name == "posix":
@@ -48,11 +48,11 @@ def open_and_re(path, list_classes, list_classes_for_graph, list_classes_for_htm
                 or k[-1] == '.':
                     list_1_or_more_classes.remove(k)
             list_classes.extend(list_1_or_more_classes)
+            if len(list_1_or_more_classes) > 0:
+                dict_sizes_of_classes[list_1_or_more_classes[0]] = os.path.getsize(path)
             if len(list_1_or_more_classes) > 1:
                 for j in list_1_or_more_classes[1:]:
                     list_classes_for_graph.append([list_1_or_more_classes[0], j])
-                    dict_sizes_of_classes[list_1_or_more_classes[0]] = os.path.getsize(path)
-                    dict_sizes_of_classes[j] = os.path.getsize(path)
         for c in classes:
             c = c.replace('{', '')
             c = c.replace('}', '')
